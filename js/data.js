@@ -122,8 +122,8 @@ const icons = [
 
 function printAllIcon(icons, container){
 	const template = document.getElementById("tpl-box").content.cloneNode(true);
-	
 	const icon = document.createElement("i");
+	
 	icon.classList.add(icons.prefix+icons.name, icons.family);
 	icon.style.color = icons.color;
 	template.querySelector(".box").append(icon);
@@ -136,16 +136,52 @@ function printAllIcon(icons, container){
 	container.append(template);
 }
 
+function printFilteredIcon(ObjectList, container, label){	
+	ObjectList.forEach((element, index) => {
+		if (element.type === label){
+			const template = document.getElementById("tpl-box").content.cloneNode(true);
+			const icon = document.createElement("i");
+
+			icon.classList.add(ObjectList[index].prefix+ObjectList[index].name, ObjectList[index].family);
+			icon.style.color = ObjectList[index].color;
+			template.querySelector(".box").append(icon);
+
+			const description = document.createElement("div");
+			description.classList.add("icon_name");
+			description.innerHTML = ObjectList[index].name;
+			template.querySelector(".box").append(description);
+
+			container.append(template);
+
+		}
+	});
+}
+
+function emptyContainer(container) {
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+}
 
 
 
 /*---------------------
  		MAIN
 ----------------------*/
-console.log("Start");
-
 const container = document.querySelector(".icons_container");
+const selector = document.querySelector("#categories");
+
 
 for (let i = 0; i < icons.length; i++){
 	printAllIcon(icons[i], container);
 }
+
+selector.addEventListener("change", (event) => {
+		emptyContainer(container);
+		const selector = document.getElementById("categories").value;
+		printFilteredIcon(icons, container, selector);
+	}
+)
+
+
+
