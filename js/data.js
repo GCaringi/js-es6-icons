@@ -1,4 +1,7 @@
-[
+/*---------------------
+ 	DATA STRUCTURE
+----------------------*/
+const icons = [
 	{
 		name: 'cat',
 		prefix: 'fa-',
@@ -112,3 +115,37 @@
 		color: 'blue'
 	}
 ];
+
+/*---------------------
+ 	    FUNCTION
+----------------------*/
+
+function printAllIcon(icons, container){
+	const template = document.getElementById("tpl-box").content.cloneNode(true);
+	
+	const icon = document.createElement("i");
+	icon.classList.add(icons.prefix+icons.name, icons.family);
+	icon.style.color = icons.color;
+	template.querySelector(".box").append(icon);
+	
+	const description = document.createElement("div");
+	description.classList.add("icon_name");
+	description.innerHTML = icons.name;
+	template.querySelector(".box").append(description);
+
+	container.append(template);
+}
+
+
+
+
+/*---------------------
+ 		MAIN
+----------------------*/
+console.log("Start");
+
+const container = document.querySelector(".icons_container");
+
+for (let i = 0; i < icons.length; i++){
+	printAllIcon(icons[i], container);
+}
