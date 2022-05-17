@@ -1,0 +1,33 @@
+/*-------- 
+    TYPO
+----------*/
+
+header{
+    height: 150px;
+    font-weight: bold;
+}
+
+header h1{
+    color: #29B1DD;
+    padding-left: 10px;
+}
+
+.select-input{
+    height: 80px;
+    background-color: #29B1DD;
+}
+
+.box{
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+    margin: 3px;
+    font-size: 36px;
+}
+
+.icon_name{
+    font-size: 21px;
+}
