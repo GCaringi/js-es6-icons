@@ -120,6 +120,10 @@ const icons = [
  	    FUNCTION
 ----------------------*/
 
+function firstToUpper(str){
+	return str[0].toUpperCase() + str.slice(1);
+}
+
 function hexColorGenerator(){
 	return "#" + Math.floor(Math.random()*16777215).toString(16);
 }
@@ -172,15 +176,37 @@ function emptyContainer(container) {
     }
 }
 
+function listOfType(ObjectList){
+	const list = new Set();
+	ObjectList.forEach(element => {
+		if (!list.has(element.type)){
+			list.add(element.type)
+		}
+	});
+	return list; 
+}
 
+function createSelection(selectionContainer, optionsList){
+	optionsList.forEach(element => {
+		const option = document.createElement("option");
+		option.setAttribute("Value", element);
+		option.innerHTML = firstToUpper(element);
+		
+		selectionContainer.append(option);
+	});
+
+}
 
 /*---------------------
  		MAIN
 ----------------------*/
+const iconsType = listOfType(icons);
+
 const container = document.querySelector(".icons_container");
 const selector = document.querySelector("#categories");
 
-
+console.log(iconsType);
+createSelection(selector, iconsType);
 printAllIcon(icons, container);
 
 selector.addEventListener("change", (event) => {
