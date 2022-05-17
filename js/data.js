@@ -121,22 +121,25 @@ const icons = [
 ----------------------*/
 
 function printAllIcon(icons, container){
-	const template = document.getElementById("tpl-box").content.cloneNode(true);
-	const icon = document.createElement("i");
-	
-	icon.classList.add(icons.prefix+icons.name, icons.family);
-	icon.style.color = icons.color;
-	template.querySelector(".box").append(icon);
-	
-	const description = document.createElement("div");
-	description.classList.add("icon_name");
-	description.innerHTML = icons.name;
-	template.querySelector(".box").append(description);
+	for (let i = 0; i < icons.length; i++){
+		
+		const template = document.getElementById("tpl-box").content.cloneNode(true);
+		const icon = document.createElement("i");
+		
+		icon.classList.add(icons[i].prefix+icons[i].name, icons[i].family);
+		icon.style.color = icons[i].color;
+		template.querySelector(".box").append(icon);
+		
+		const description = document.createElement("div");
+		description.classList.add("icon_name");
+		description.innerHTML = icons[i].name;
+		template.querySelector(".box").append(description);
 
-	container.append(template);
+		container.append(template);
+	}
 }
 
-function printFilteredIcon(ObjectList, container, label){	
+function printFilteredIcon(ObjectList, container, label){
 	ObjectList.forEach((element, index) => {
 		if (element.type === label){
 			const template = document.getElementById("tpl-box").content.cloneNode(true);
@@ -152,6 +155,8 @@ function printFilteredIcon(ObjectList, container, label){
 			template.querySelector(".box").append(description);
 
 			container.append(template);
+
+		}else{
 
 		}
 	});
@@ -172,14 +177,17 @@ const container = document.querySelector(".icons_container");
 const selector = document.querySelector("#categories");
 
 
-for (let i = 0; i < icons.length; i++){
-	printAllIcon(icons[i], container);
-}
+printAllIcon(icons, container);
 
 selector.addEventListener("change", (event) => {
 		emptyContainer(container);
 		const selector = document.getElementById("categories").value;
-		printFilteredIcon(icons, container, selector);
+		console.log(selector);
+		if (selector === "all"){
+			printAllIcon(icons, container);
+		}else{
+			printFilteredIcon(icons, container, selector);
+		}
 	}
 )
 
