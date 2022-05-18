@@ -24,9 +24,12 @@ header h1{
     justify-content: center;
     align-items: center;
     background-color: lightgray;
-    margin: 3px;
     font-size: 36px;
     border-radius: 10px;
+}
+
+.icons_container{
+    gap: 20px;
 }
 
 .icon_name{
